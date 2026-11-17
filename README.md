@@ -27,5 +27,5 @@ git push -u origin main
 
 ## AdSense 开通后
 
-AdSense 后台「网站 → ads.txt 状态」出现提醒时，复制后台给出的 `google.com, pub-XXXX…, DIRECT, f08c47fec0942fa0` 行，
-替换本仓库 `ads.txt` 中的占位行，提交推送即可。GitHub Pages 部署需几分钟，AdSense 侧刷新最多可能要一个月（低流量站点）。
+2026-11-17 已填入真实发布商 ID（pub-5270311938787209），根页面亦已挂 google-adsense-account 元标记；
+后续如更换发布商 ID，改 `ads.txt` 数据行并提交推送即可。
