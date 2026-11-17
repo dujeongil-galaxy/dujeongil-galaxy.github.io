@@ -1,0 +1,5 @@
+# ads.txt —— 授权数字卖方声明（Google AdSense）
+# 说明：发布商 ID（pub-XXXXXXXXXXXXXXXX）在 AdSense 账号开通后由后台「网站 → ads.txt」
+# 生成。拿到真实 ID 后，把下面一行的占位符替换掉即可（格式与 f08c47fec0942fa0 不变）。
+# 未替换前此文件仅为占位，不影响站点运行，也不会被 Google 视为有效授权。
+google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
