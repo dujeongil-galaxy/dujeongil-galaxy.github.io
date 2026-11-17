@@ -10,29 +10,96 @@
 <link rel="icon" type="image/svg+xml" href="https://dujeongil-galaxy.github.io/shuangxiugou/favicon.svg">
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:system-ui,-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;
-line-height:1.85;color:#1f2937;background:#f3f4f6;min-height:100vh;display:grid;place-items:center}
-main{max-width:640px;margin:0 auto;padding:40px 20px;background:#fff;border-radius:14px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
-h1{font-size:26px;font-weight:800;margin:0 0 10px}
-p{margin:0 0 12px}
-a{color:#0F766E}
-.legal{font-size:13px;color:#6b7280}
+html,body{margin:0;min-height:100%}
+body{
+  font-family:system-ui,-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;
+  line-height:1.85;color:#1f2937;
+  background:linear-gradient(135deg,#e0f2fe 0%,#fce7f3 45%,#d1fae5 100%);
+  min-height:100vh;display:grid;place-items:center;padding:32px 16px;overflow-x:hidden;position:relative
+}
+/* 漂浮装饰：呼应参考站的插画感（emoji + 色块均为纯 CSS，零外部素材） */
+.deco{position:fixed;user-select:none;pointer-events:none;filter:saturate(1.2);animation:float 9s ease-in-out infinite;z-index:0}
+.d1{top:8%;left:6%;font-size:64px;opacity:.5;animation-delay:0s}
+.d2{top:14%;right:8%;font-size:56px;opacity:.45;animation-delay:-2s}
+.d3{bottom:12%;left:10%;font-size:52px;opacity:.45;animation-delay:-4s}
+.d4{bottom:8%;right:7%;font-size:60px;opacity:.5;animation-delay:-6s}
+.d5{top:46%;left:2%;font-size:40px;opacity:.35;animation-delay:-3s}
+.d6{top:52%;right:3%;font-size:44px;opacity:.35;animation-delay:-5s}
+.blob{position:fixed;border-radius:50%;filter:blur(2px);opacity:.5;z-index:0}
+.b1{width:340px;height:340px;background:#bfdbfe;top:-90px;right:-70px}
+.b2{width:300px;height:300px;background:#fbcfe8;bottom:-80px;left:-60px}
+.b3{width:200px;height:200px;background:#a7f3d0;top:55%;right:16%}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-16px) rotate(4deg)}}
+main{
+  position:relative;z-index:1;
+  max-width:430px;width:100%;
+  background:#fff;border-radius:20px;
+  box-shadow:0 12px 40px rgba(30,58,138,.16),0 2px 8px rgba(30,58,138,.08);
+  padding:36px 30px 26px;text-align:center
+}
+.logo{width:56px;height:56px;border-radius:16px;background:#ecfdf5;display:grid;place-items:center;margin:0 auto 12px}
+.logo img{width:40px;height:40px}
+h1{font-size:26px;font-weight:800;margin:0 0 10px;color:#111827}
+.sub{margin:0 0 22px;color:#6b7280;font-size:14.5px}
+.btn{
+  display:block;width:100%;padding:13px 18px;margin:0 0 12px;
+  border-radius:999px;font-size:16px;font-weight:700;text-decoration:none;
+  transition:transform .15s ease,box-shadow .15s ease,background .15s ease
+}
+.btn-primary{
+  background:linear-gradient(135deg,#2563eb,#0F766E);color:#fff;
+  box-shadow:0 6px 18px rgba(37,99,235,.35)
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(37,99,235,.4)}
+.btn-promo{
+  background:#fff;color:#2563eb;border:2px solid #93c5fd;
+  box-shadow:0 2px 8px rgba(37,99,235,.10);position:relative
+}
+.btn-promo:hover{transform:translateY(-2px);border-color:#2563eb;background:#eff6ff}
+.btn-promo .tag{
+  position:absolute;top:-9px;right:14px;background:#f59e0b;color:#fff;
+  font-size:11px;font-weight:700;padding:1px 8px;border-radius:999px
+}
+.btn small{display:block;font-size:11.5px;font-weight:500;opacity:.85;margin-top:2px}
+.links{margin:18px 0 14px;font-size:14px}
+.links a{color:#0F766E;text-decoration:none;font-weight:600}
+.links a:hover{text-decoration:underline}
+.legal{font-size:12.5px;color:#6b7280;margin:0;padding-top:14px;border-top:1px solid #f3f4f6}
+.legal a{color:#6b7280;text-decoration:none}
+.legal a:hover{color:#0F766E;text-decoration:underline}
+.copyright{font-size:11.5px;color:#9ca3af;margin:8px 0 0}
+@media (prefers-reduced-motion:reduce){.deco{animation:none}.btn{transition:none}}
 </style>
 <meta name="google-adsense-account" content="ca-pub-5270311938787209">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5270311938787209" crossorigin="anonymous"></script>
 </head>
 <body>
+<span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+<span class="deco d1">🦈</span><span class="deco d2">🐧</span><span class="deco d3">🐤</span>
+<span class="deco d4">⭐</span><span class="deco d5">💤</span><span class="deco d6">🌙</span>
+
 <main>
+  <div class="logo"><img src="https://dujeongil-galaxy.github.io/shuangxiugou/favicon.svg" alt="双休购 logo"></div>
   <h1>双休购 ShuangxiuGo</h1>
-  <p>查企业双休评级、平均下班时间与证据链，避雷单休、大小周与 996 的开源工具。</p>
-  <p><a href="https://dujeongil-galaxy.github.io/shuangxiugou/"><strong>进入双休购 →</strong></a></p>
-  <p><a href="https://github.com/dujeongil-galaxy/shuangxiugou">GitHub 仓库</a></p>
+  <p class="sub">查企业双休评级、平均下班时间与证据链，<br>避雷单休、大小周与 996 的开源工具。</p>
+
+  <a class="btn btn-primary" href="https://dujeongil-galaxy.github.io/shuangxiugou/">进入双休购 →</a>
+
+  <a class="btn btn-promo" href="https://47.112.97.173:8000/register?aff=v17mHNYv" target="_blank" rel="sponsored noopener">
+    <span class="tag">推广</span>
+    魔戒.net 高速线路 · 注册传送门
+    <small>站点网络加速支持（邀请码已自动填入）</small>
+  </a>
+
+  <p class="links"><a href="https://github.com/dujeongil-galaxy/shuangxiugou" target="_blank" rel="noopener noreferrer">GitHub 仓库</a></p>
+
   <p class="legal">
     <a href="https://dujeongil-galaxy.github.io/shuangxiugou/privacy.html">隐私政策</a> ·
     <a href="https://dujeongil-galaxy.github.io/shuangxiugou/disclaimer.html">免责声明</a> ·
     <a href="https://dujeongil-galaxy.github.io/shuangxiugou/about.html">关于本站</a> ·
     <a href="https://dujeongil-galaxy.github.io/shuangxiugou/contact.html">联系站长</a>
   </p>
+  <p class="copyright">© 2026 双休购 ShuangxiuGo · dujeongil-galaxy</p>
 </main>
 </body>
 </html>
