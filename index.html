@@ -103,10 +103,12 @@ h1{font-size:26px;font-weight:800;margin:0 0 10px;color:#111827}
   <p class="copyright">© 2026 双休购 ShuangxiuGo · dujeongil-galaxy</p>
 </main>
 
-<!-- 微信/QQ 内置浏览器拦截（2026-11-18 站长指令）：根页面自身不拦；
-     但点击指向双休购的链接（进入按钮 + 页脚各链接）时，UA 命中微信/QQ
-     内置浏览器则不导航，弹全屏拦截层要求复制地址到系统浏览器打开。
-     UA 口径与主站 ua-guard.js 一致：MicroMessenger/wxwork、QQ/数字、Tim。 -->
+<!-- 微信/QQ 内置浏览器与独立 QQ 浏览器拦截（2026-11-18 建立，11-19 扩围）：
+     根页面自身不拦；但点击指向双休购的链接（进入按钮 + 页脚各链接）时，
+     UA 命中微信/QQ 内置浏览器或独立 QQ 浏览器则不导航，
+     弹全屏拦截层要求复制地址到系统浏览器打开。
+     UA 口径与主站 ua-guard.js 一致：MicroMessenger/wxwork、QQ/数字、Tim、
+     MQQBrowser/数字、QQBrowser/数字。 -->
 <style id="rguard-style">
 #sxg-rguard{position:fixed;inset:0;z-index:2147483647;display:none;align-items:center;justify-content:center;padding:22px;
   background:linear-gradient(165deg,#ecfdf5 0%,#f0fdfa 55%,#d1fae5 100%);
@@ -132,7 +134,7 @@ h1{font-size:26px;font-weight:800;margin:0 0 10px;color:#111827}
   <div class="rg-card">
     <div class="rg-logo">休</div>
     <p class="rg-title">请在系统浏览器打开「双休购」</p>
-    <p class="rg-reason">你正在用微信 / QQ 的内置浏览器访问，本站在这里容易被拦截或显示异常。复制地址到系统浏览器，一步就能正常打开：</p>
+    <p class="rg-reason">你正在用微信 / QQ 的内置浏览器，或 QQ 浏览器访问，本站在这里容易被拦截或显示异常。复制地址到系统浏览器，一步就能正常打开：</p>
     <ul class="rg-steps">
       <li><b>① </b>点下面的按钮，复制地址</li>
       <li><b>② </b>打开系统自带的浏览器（Safari / Chrome / Edge 均可）</li>
@@ -148,7 +150,8 @@ h1{font-size:26px;font-weight:800;margin:0 0 10px;color:#111827}
   'use strict';
   try {
     var ua = navigator.userAgent || '';
-    var blocked = /MicroMessenger/i.test(ua) || /wxwork/i.test(ua) || /\bQQ\/[\d.]+/.test(ua) || /\/Tim\//.test(ua);
+    var blocked = /MicroMessenger/i.test(ua) || /wxwork/i.test(ua) || /\bQQ\/[\d.]+/.test(ua) || /\/Tim\//.test(ua)
+      || /MQQBrowser\/[\d.]+/i.test(ua) || /QQBrowser\/[\d.]+/i.test(ua);
     if (!blocked) return; // 正常浏览器：不拦根页面，按钮照常跳
     var layer = document.getElementById('sxg-rguard');
     var urlBox = document.getElementById('rg-url');

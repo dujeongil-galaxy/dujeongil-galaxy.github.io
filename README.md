@@ -30,6 +30,8 @@ git push -u origin main
 2026-11-17 已填入真实发布商 ID（pub-5270311938787209），根页面亦已挂 google-adsense-account 元标记；
 后续如更换发布商 ID，改 `ads.txt` 数据行并提交推送即可。
 
-## 微信 / QQ 内置浏览器拦截（2026-11-18）
+## 内置浏览器与 QQ 浏览器拦截（2026-11-18 建立，11-19 扩围）
 
-站长指令：根页面自身不拦；但 UA 命中微信 / QQ 内置浏览器时，点击指向 `/shuangxiugou` 的链接（「进入双休购」按钮与页脚各链接）一律不导航，弹全屏拦截层要求复制地址到系统浏览器打开。UA 口径与主站 `ua-guard.js` 一致：MicroMessenger/wxwork、QQ/数字、Tim；独立 QQBrowser 不受影响。
+根页面自身不拦；但 UA 命中下列浏览器时，点击指向 `/shuangxiugou` 的链接（「进入双休购」按钮与页脚各链接）一律不导航，弹全屏拦截层要求复制地址到系统浏览器打开。UA 口径与主站 `ua-guard.js` 一致：MicroMessenger/wxwork、QQ/数字、Tim，以及 2026-11-19 起加入的独立 QQ 浏览器（MQQBrowser/数字、QQBrowser/数字）。
+
+扩围依据：主仓库 `archive/wechat-liciaotiao-2023/` 收录的两篇 2023-08-24 微信文章（腾讯方律师函与作者回应），记录了「李跳跳」屏蔽 QQ 浏览器广告服务的争议；站长据此决定把 QQ 浏览器与微信/QQ 内置浏览器同等对待。
