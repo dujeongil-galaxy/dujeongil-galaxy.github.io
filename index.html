@@ -102,5 +102,108 @@ h1{font-size:26px;font-weight:800;margin:0 0 10px;color:#111827}
   </p>
   <p class="copyright">© 2026 双休购 ShuangxiuGo · dujeongil-galaxy</p>
 </main>
+
+<!-- 微信/QQ 内置浏览器拦截（2026-11-18 站长指令）：根页面自身不拦；
+     但点击指向双休购的链接（进入按钮 + 页脚各链接）时，UA 命中微信/QQ
+     内置浏览器则不导航，弹全屏拦截层要求复制地址到系统浏览器打开。
+     UA 口径与主站 ua-guard.js 一致：MicroMessenger/wxwork、QQ/数字、Tim。 -->
+<style id="rguard-style">
+#sxg-rguard{position:fixed;inset:0;z-index:2147483647;display:none;align-items:center;justify-content:center;padding:22px;
+  background:linear-gradient(165deg,#ecfdf5 0%,#f0fdfa 55%,#d1fae5 100%);
+  font-family:system-ui,-apple-system,'PingFang SC','Microsoft YaHei',sans-serif}
+#sxg-rguard.rguard-on{display:flex}
+#sxg-rguard .rg-card{max-width:360px;width:100%;box-sizing:border-box;background:#fff;border-radius:22px;
+  box-shadow:0 24px 64px rgba(15,118,110,.20);padding:30px 24px 22px;text-align:center}
+#sxg-rguard .rg-logo{width:52px;height:52px;margin:0 auto 14px;border-radius:16px;background:#0F766E;color:#fff;
+  font-size:26px;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(15,118,110,.35)}
+#sxg-rguard .rg-title{font-size:18px;font-weight:800;color:#064E3B;line-height:1.4;margin:0 0 10px}
+#sxg-rguard .rg-reason{font-size:13px;color:#64748B;line-height:1.7;margin:0 0 14px}
+#sxg-rguard .rg-steps{list-style:none;margin:0 0 14px;padding:0;text-align:left}
+#sxg-rguard .rg-steps li{font-size:13.5px;color:#334155;line-height:1.9}
+#sxg-rguard .rg-steps b{color:#0F766E}
+#sxg-rguard .rg-url{background:#F1F5F9;border-radius:10px;padding:9px 11px;margin:0 0 14px;font-size:12px;
+  color:#475569;word-break:break-all;user-select:all;-webkit-user-select:all;text-align:left;line-height:1.5}
+#sxg-rguard .rg-copy{display:block;width:100%;height:46px;border:none;border-radius:999px;cursor:pointer;
+  background:#0F766E;color:#fff;font-size:16px;font-weight:700;letter-spacing:1px;
+  box-shadow:0 8px 20px rgba(15,118,110,.30);-webkit-appearance:none;appearance:none}
+#sxg-rguard .rg-hint{font-size:12px;color:#94A3B8;line-height:1.6;margin:12px 0 0}
+</style>
+<div id="sxg-rguard" role="dialog" aria-modal="true" aria-label="请在系统浏览器打开双休购">
+  <div class="rg-card">
+    <div class="rg-logo">休</div>
+    <p class="rg-title">请在系统浏览器打开「双休购」</p>
+    <p class="rg-reason">你正在用微信 / QQ 的内置浏览器访问，本站在这里容易被拦截或显示异常。复制地址到系统浏览器，一步就能正常打开：</p>
+    <ul class="rg-steps">
+      <li><b>① </b>点下面的按钮，复制地址</li>
+      <li><b>② </b>打开系统自带的浏览器（Safari / Chrome / Edge 均可）</li>
+      <li><b>③ </b>粘贴地址并访问，即可正常浏览</li>
+    </ul>
+    <div class="rg-url" id="rg-url"></div>
+    <button type="button" class="rg-copy" id="rg-copy">复制地址</button>
+    <p class="rg-hint">复制按钮无效时，可长按上方地址手动复制；微信内也可点右上角「···」→「复制链接」。</p>
+  </div>
+</div>
+<script>
+(function () {
+  'use strict';
+  try {
+    var ua = navigator.userAgent || '';
+    var blocked = /MicroMessenger/i.test(ua) || /wxwork/i.test(ua) || /\bQQ\/[\d.]+/.test(ua) || /\/Tim\//.test(ua);
+    if (!blocked) return; // 正常浏览器：不拦根页面，按钮照常跳
+    var layer = document.getElementById('sxg-rguard');
+    var urlBox = document.getElementById('rg-url');
+    var btn = document.getElementById('rg-copy');
+    function open(target) {
+      if (urlBox.textContent !== target) {
+        urlBox.textContent = target;
+        btn.textContent = '复制地址';
+        btn.style.background = '';
+        btn.setAttribute('data-rg-state', 'idle');
+      }
+      layer.classList.add('rguard-on');
+    }
+    document.addEventListener('click', function (ev) {
+      var a = ev.target && ev.target.closest ? ev.target.closest('a[href]') : null;
+      if (!a) return;
+      var href = a.getAttribute('href') || '';
+      if (href.indexOf('/shuangxiugou') === -1) return; // 只拦进双休购的链接
+      ev.preventDefault();
+      ev.stopPropagation();
+      open(a.href);
+    }, true);
+    btn.addEventListener('click', function () {
+      if (btn.getAttribute('data-rg-state') === 'done') return;
+      var text = urlBox.textContent;
+      function legacy() {
+        try {
+          var ta = document.createElement('textarea');
+          ta.value = text;
+          ta.setAttribute('readonly', 'readonly');
+          ta.style.cssText = 'position:fixed;top:-999px;left:-999px;opacity:0';
+          document.body.appendChild(ta);
+          ta.select();
+          var ok = false;
+          try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+          document.body.removeChild(ta);
+          if (ok) {
+            btn.setAttribute('data-rg-state', 'done');
+            btn.textContent = '✓ 已复制，去系统浏览器粘贴打开';
+            btn.style.background = '#059669';
+          } else {
+            btn.textContent = '复制失败，请长按上方地址手动复制';
+          }
+        } catch (e) { /* 忽略 */ }
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () {
+          btn.setAttribute('data-rg-state', 'done');
+          btn.textContent = '✓ 已复制，去系统浏览器粘贴打开';
+          btn.style.background = '#059669';
+        }, legacy);
+      } else { legacy(); }
+    });
+  } catch (e) { /* 静默 */ }
+})();
+</script>
 </body>
 </html>
