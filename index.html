@@ -108,7 +108,8 @@ h1{font-size:26px;font-weight:800;margin:0 0 10px;color:#111827}
      UA 命中微信/QQ 内置浏览器或独立 QQ 浏览器则不导航，
      弹全屏拦截层要求复制地址到系统浏览器打开。
      UA 口径与主站 ua-guard.js 一致：MicroMessenger/wxwork、QQ/数字、Tim、
-     MQQBrowser/数字、QQBrowser/数字。 -->
+     MQQBrowser / QQBrowser 任意形态（手机 App 与电脑版都算；不绑定版本号，
+     避免 PC 端 QQBrowser/10.x 因格式差异漏拦）。 -->
 <style id="rguard-style">
 #sxg-rguard{position:fixed;inset:0;z-index:2147483647;display:none;align-items:center;justify-content:center;padding:22px;
   background:linear-gradient(165deg,#ecfdf5 0%,#f0fdfa 55%,#d1fae5 100%);
@@ -151,7 +152,7 @@ h1{font-size:26px;font-weight:800;margin:0 0 10px;color:#111827}
   try {
     var ua = navigator.userAgent || '';
     var blocked = /MicroMessenger/i.test(ua) || /wxwork/i.test(ua) || /\bQQ\/[\d.]+/.test(ua) || /\/Tim\//.test(ua)
-      || /MQQBrowser\/[\d.]+/i.test(ua) || /QQBrowser\/[\d.]+/i.test(ua);
+      || /MQQBrowser/i.test(ua) || /QQBrowser/i.test(ua);
     if (!blocked) return; // 正常浏览器：不拦根页面，按钮照常跳
     var layer = document.getElementById('sxg-rguard');
     var urlBox = document.getElementById('rg-url');
