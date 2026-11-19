@@ -34,4 +34,10 @@ git push -u origin main
 
 根页面自身不拦；但 UA 命中下列浏览器时，点击指向 `/shuangxiugou` 的链接（「进入双休购」按钮与页脚各链接）一律不导航，弹全屏拦截层要求复制地址到系统浏览器打开。UA 口径与主站 `ua-guard.js` 一致：MicroMessenger/wxwork、QQ/数字、Tim，以及 2026-11-19 起加入的独立 QQ 浏览器（MQQBrowser/数字、QQBrowser/数字）。
 
+例外（2026-11-20）：导航区右侧的「站长工具」`ua-check.html` 用于诊断当前浏览器，必须原样打开，不进上述分流；否则被拦截的浏览器恰好最需要这个诊断页。
+
+## 导航区（2026-11-20）
+
+卡片中部一行两个链接：左侧 `repositories`（GitHub 仓库列表，原「GitHub 全部仓库」按站长要求改短），右侧「站长工具」→ `https://dujeongil-galaxy.github.io/shuangxiugou/ua-check.html`。由 `scripts/verify.cjs` + `.github/workflows/verify.yml` 双重校验文案、目标与顺序。
+
 扩围依据：主仓库 `archive/wechat-liciaotiao-2023/` 收录的两篇 2023-08-24 微信文章（腾讯方律师函与作者回应），记录了「李跳跳」屏蔽 QQ 浏览器广告服务的争议；站长据此决定把 QQ 浏览器与微信/QQ 内置浏览器同等对待。

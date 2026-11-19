@@ -91,7 +91,7 @@ h1{font-size:26px;font-weight:800;margin:0 0 10px;color:#111827}
     <small>站点网络加速支持（邀请码已自动填入）</small>
   </a>
 
-  <p class="links"><a href="https://github.com/dujeongil-galaxy?tab=repositories" target="_blank" rel="noopener noreferrer">GitHub 全部仓库</a></p>
+  <p class="links"><a href="https://github.com/dujeongil-galaxy?tab=repositories" target="_blank" rel="noopener noreferrer">repositories</a> · <a href="https://dujeongil-galaxy.github.io/shuangxiugou/ua-check.html">站长工具</a></p>
 
   <p class="legal">
     <a href="https://dujeongil-galaxy.github.io/shuangxiugou/privacy.html">隐私政策</a> ·
@@ -103,11 +103,12 @@ h1{font-size:26px;font-weight:800;margin:0 0 10px;color:#111827}
   <p class="copyright">© 2026 双休购 ShuangxiuGo · dujeongil-galaxy</p>
 </main>
 
-<!-- 微信/QQ 内置浏览器拦截 + QQ 浏览器引导专题页（2026-11-18 建立，11-19 三次调整）：
+<!-- 微信/QQ 内置浏览器拦截 + QQ 浏览器引导专题页（2026-11-18 建立，11-19 三次调整，11-20 补站长工具例外）：
      根页面自身不拦；点击指向双休购的链接（进入按钮 + 页脚各链接）时分流：
      微信/QQ 内置浏览器 → 不导航，弹全屏拦截层要求复制地址到系统浏览器；
      独立 QQ 浏览器（MQQBrowser / QQBrowser 任意形态）→ 直接导航到主站的
      QQ 浏览器专题报道页，看律师函与作者回应两篇存档。
+     例外：站长工具（ua-check.html）用于诊断当前浏览器，必须原样打开，不走分流。
      UA 口径与主站 ua-guard.js 一致，不绑定版本号（PC 端 QQBrowser/10.x 同样覆盖）。 -->
 <style id="rguard-style">
 #sxg-rguard{position:fixed;inset:0;z-index:2147483647;display:none;align-items:center;justify-content:center;padding:22px;
@@ -171,6 +172,7 @@ h1{font-size:26px;font-weight:800;margin:0 0 10px;color:#111827}
       if (!a) return;
       var href = a.getAttribute('href') || '';
       if (href.indexOf('/shuangxiugou') === -1) return; // 只管进双休购的链接
+      if (href.indexOf('ua-check.html') !== -1) return; // 站长工具要诊断当前浏览器，原样打开
       ev.preventDefault();
       ev.stopPropagation();
       if (isQQBrowser && !isBuiltin) {
