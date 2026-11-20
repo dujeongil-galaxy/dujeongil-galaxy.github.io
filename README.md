@@ -38,6 +38,6 @@ git push -u origin main
 
 ## 导航区（2026-11-20）
 
-卡片中部一行两个链接：左侧 `repositories`（GitHub 仓库列表，原「GitHub 全部仓库」按站长要求改短），右侧「站长工具」→ `https://dujeongil-galaxy.github.io/shuangxiugou/ua-check.html`。由 `scripts/verify.cjs` + `.github/workflows/verify.yml` 双重校验文案、目标与顺序。
+卡片中部一行两个链接：左侧 `Repositories`（R 大写，站长 2026-11-21 指定；GitHub 仓库列表，原「GitHub 全部仓库」按站长要求改短），右侧「站长工具」→ `https://dujeongil-galaxy.github.io/shuangxiugou/ua-check.html`。由 `scripts/verify.cjs` + `.github/workflows/verify.yml` 双重校验文案、目标与顺序。
 
 扩围依据：主仓库 `archive/wechat-liciaotiao-2023/` 收录的两篇 2023-08-24 微信文章（腾讯方律师函与作者回应），记录了「李跳跳」屏蔽 QQ 浏览器广告服务的争议；站长据此决定把 QQ 浏览器与微信/QQ 内置浏览器同等对待。

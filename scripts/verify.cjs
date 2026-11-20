@@ -24,7 +24,7 @@ if (links) {
   }
   ok(items.length === 2, '导航区应恰好 2 个链接，实际 ' + items.length);
   if (items.length >= 1) {
-    ok(items[0].text === 'repositories', '左链接文案应为 repositories，实际「' + items[0].text + '」');
+    ok(items[0].text === 'Repositories', '左链接文案应为 Repositories（R 大写），实际「' + items[0].text + '」');
     ok(items[0].href === 'https://github.com/dujeongil-galaxy?tab=repositories', 'repositories 链接目标错误');
   }
   if (items.length >= 2) {
@@ -45,5 +45,5 @@ if (fails.length) {
   console.error('错误 ' + fails.length + ' 项：\n' + fails.map(function (f) { return ' - ' + f; }).join('\n'));
   process.exitCode = 1;
 } else {
-  console.log('根页面导航校验通过：repositories + 站长工具（ua-check.html），UA 分流例外有效');
+  console.log('根页面导航校验通过：Repositories + 站长工具（ua-check.html），UA 分流例外有效');
 }
