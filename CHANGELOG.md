@@ -4,10 +4,10 @@
 
 ## 2026-11-21
 
-### `7f8715f` · 2026-11-21 · fix: 导航链接 repositories → Repositories（仅 R 大写，其余不变）
+### `a3d461a` · 2026-11-21 · fix: 导航链接 repositories → Repositories（仅 R 大写，其余不变）
 
-- 站长指定把首页导航左链接文案的首字母大写： → ，链接目标（）、右链接与 UA 分流例外一律不动。
--  断言同步为 （含「仅 R 大写」提示）、README 导航说明同步；校验通过。
+- 站长指定把首页导航左链接文案的首字母大写：`repositories` → `Repositories`，链接目标（`https://github.com/dujeongil-galaxy?tab=repositories`）、右链接与 UA 分流例外一律不动。
+- `scripts/verify.cjs` 断言同步为 `Repositories`（含「仅 R 大写」提示）、README 导航说明同步；校验通过。
 
 ## 2026-11-20
 
